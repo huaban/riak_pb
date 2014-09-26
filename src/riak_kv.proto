@@ -66,6 +66,36 @@ message RpbGetResp {
     optional bool unchanged = 3;
 }
 
+// Scan Request - retrieve indice
+message RpbScanReq {
+    enum OrderType {
+        prev = 0;
+        next = 1;
+    }
+
+    required bytes bucket = 1;
+    required bytes key = 2;
+    required uint32 offset = 3;
+    required uint32 len = 4;
+    required OrderType order = 5;
+    // optional uint32 r = 3;
+    // optional uint32 pr = 4;
+    // optional bool basic_quorum = 5;
+    // optional bool notfound_ok = 6;
+    // optional bytes if_modified = 7;     // fail if the supplied vclock does not match
+    // optional bool head = 8;             // return everything but the value
+    // optional bool deletedvclock = 9;    // return the tombstone's vclock, if applicable
+    optional uint32 timeout = 10;
+    // optional bool sloppy_quorum = 11;   // Experimental, may change/disappear
+    // optional uint32 n_val = 12;         // Experimental, may change/disappear
+    optional bytes type = 13;           // Bucket type, if not set we assume the 'default' type
+}
+
+// Get Response - if the record was not found there will be no content/vclock
+message RpbScanResp {
+    repeated RpbContent content = 1;
+    optional bool unchanged = 3;
+}
 
 // Put request - if options.return_body is set then the updated metadata/data for
 //               the key will be returned.
@@ -115,7 +145,7 @@ message RpbDelReq {
 
 // Delete response - not defined, will return a RpbDelResp on success or RpbErrorResp on failure
 
-// List buckets request 
+// List buckets request
 message RpbListBucketsReq {
     optional uint32 timeout = 1;
     optional bool stream = 2;
@@ -255,7 +285,7 @@ message RpbCounterUpdateReq {
 
 // Counter update response? No message | error response
 message RpbCounterUpdateResp {
-        optional sint64 value = 1;
+    optional sint64 value = 1;
 }
 
 // counter value

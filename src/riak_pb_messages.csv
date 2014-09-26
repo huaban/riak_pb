@@ -51,3 +51,5 @@
 253,RpbAuthReq,riak
 254,RpbAuthResp,riak
 255,RpbStartTls,riak
+100,RpbScanReq,riak_kv
+101,RpbScanResp,riak_kv

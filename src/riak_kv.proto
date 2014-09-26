@@ -85,16 +85,16 @@ message RpbScanReq {
     // optional bytes if_modified = 7;     // fail if the supplied vclock does not match
     // optional bool head = 8;             // return everything but the value
     // optional bool deletedvclock = 9;    // return the tombstone's vclock, if applicable
-    optional uint32 timeout = 10;
+    optional uint32 timeout = 6;
     // optional bool sloppy_quorum = 11;   // Experimental, may change/disappear
     // optional uint32 n_val = 12;         // Experimental, may change/disappear
-    optional bytes type = 13;           // Bucket type, if not set we assume the 'default' type
+    optional bytes type = 7;           // Bucket type, if not set we assume the 'default' type
 }
 
 // Get Response - if the record was not found there will be no content/vclock
 message RpbScanResp {
     repeated RpbContent content = 1;
-    optional bool unchanged = 3;
+    optional bool unchanged = 2;
 }
 
 // Put request - if options.return_body is set then the updated metadata/data for

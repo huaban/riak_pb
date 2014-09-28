@@ -93,8 +93,7 @@ message RpbScanReq {
 
 // Get Response - if the record was not found there will be no content/vclock
 message RpbScanResp {
-    repeated RpbContent content = 1;
-    optional bool unchanged = 2;
+    optional RpbContent content = 1;
 }
 
 // Put request - if options.return_body is set then the updated metadata/data for
